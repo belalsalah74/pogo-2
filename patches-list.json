@@ -28,6 +28,35 @@
         }
       ],
       "options": []
+    },
+    {
+      "name": "Google web sign-in",
+      "description": "Replaces Google Play Services sign-in with a browser-based Google login so Google accounts work in re-signed builds. Pokémon GO 0.431.0.",
+      "default": true,
+      "category": null,
+      "dependencies": [
+        "ResourcePatch"
+      ],
+      "compatiblePackages": [
+        {
+          "packageName": "com.nianticlabs.pokemongo",
+          "name": "Pokémon GO",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "targets": [
+            {
+              "version": "0.431.0",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
     }
   ]
 }
