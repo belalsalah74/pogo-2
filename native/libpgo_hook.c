@@ -27,9 +27,17 @@ static const uint8_t EXPECTED_PROLOGUE[20] = {
 typedef void (*curve_set_t)(void *, float, float, float, void *);
 static curve_set_t orig_curve_set;
 
+static int hit_count;
+
 static void curve_set_hook(void *self, float x, float y, float z, void *mi) {
+    /* Log the first few calls so a log shows whether the game reaches this setter at all. */
+    int n = __atomic_fetch_add(&hit_count, 1, __ATOMIC_RELAXED);
     float mag = x * x + y * y + z * z;
-    if (mag < 0.000001f) x = 1.0f;
+    int zero = mag < 0.000001f;
+    if (n < 20)
+        LOGI("curve setter call #%d in=(%f,%f,%f) %s", n + 1, (double)x, (double)y, (double)z,
+             zero ? "zero vector -> forcing x=1" : "non-zero, unchanged");
+    if (zero) x = 1.0f;
     orig_curve_set(self, x, y, z, mi);
 }
 
