@@ -1,3 +1,9 @@
+## [1.1.0-dev.1](https://github.com/belalsalah74/pogo-2/compare/v1.0.0...v1.1.0-dev.1) (2026-10-18)
+
+### ✨ New Features
+
+* feat signin2 ([4af443e](https://github.com/belalsalah74/pogo-2/commit/4af443ed97ccaba8cd801f2af50e00002b029f06))
+
 ## 1.0.0 (2026-10-18)
 
 ### ✨ New Features
