@@ -1,0 +1,4 @@
+/home/belal/github/pogo2/native/build/CMakeFiles/pgo_hook.dir
+/home/belal/github/pogo2/native/build/CMakeFiles/pgo_main.dir
+/home/belal/github/pogo2/native/build/CMakeFiles/edit_cache.dir
+/home/belal/github/pogo2/native/build/CMakeFiles/rebuild_cache.dir

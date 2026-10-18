@@ -1,0 +1,7 @@
+app.pogo.extension-pngs-0 /home/belal/github/pogo2/extensions/extension/build/generated/res/pngs/release
+app.pogo.extension-updated_navigation_xml-1 /home/belal/github/pogo2/extensions/extension/build/generated/updated_navigation_xml/release
+app.pogo.extension-packageReleaseResources-2 /home/belal/github/pogo2/extensions/extension/build/intermediates/incremental/release/packageReleaseResources/merged.dir
+app.pogo.extension-packageReleaseResources-3 /home/belal/github/pogo2/extensions/extension/build/intermediates/incremental/release/packageReleaseResources/stripped.dir
+app.pogo.extension-release-4 /home/belal/github/pogo2/extensions/extension/build/intermediates/merged_res/release/mergeReleaseResources
+app.pogo.extension-main-5 /home/belal/github/pogo2/extensions/extension/src/main/res
+app.pogo.extension-release-6 /home/belal/github/pogo2/extensions/extension/src/release/res

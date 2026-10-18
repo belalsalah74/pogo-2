@@ -1,0 +1,5 @@
+# ninja log v7
+0	20	1792138410724086756	CMakeFiles/pgo_main.dir/libmain_wrapper.c.o	fe16eab8dd723a30
+21	32	1792138410744355199	libmain.so	8da509712b2e07d
+0	42	1792138410723086769	CMakeFiles/pgo_hook.dir/libpgo_hook.c.o	4464eaa6150f0927
+42	53	1792138410765086222	libpgo_hook.so	5494602ef7770b41

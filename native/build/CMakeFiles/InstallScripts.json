@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/belal/github/pogo2/native/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

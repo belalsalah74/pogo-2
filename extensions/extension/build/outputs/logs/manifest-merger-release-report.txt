@@ -1,0 +1,19 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml:1:1-12
+INJECTED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml:1:1-12
+	package
+		INJECTED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml
+application
+INJECTED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml reason: application injection requested
+INJECTED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml
+	android:extractNativeLibs
+		INJECTED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml
+uses-sdk
+INJECTED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml
+INJECTED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/belal/github/pogo2/extensions/extension/src/main/AndroidManifest.xml
