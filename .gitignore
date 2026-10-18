@@ -98,7 +98,8 @@ fabric.properties
 
 ### Gradle template
 .gradle
-
+**/build/
+!src/**/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -127,3 +128,5 @@ node_modules/
 # Ignore IDEA files
 .idea/
 local.properties
+
+native/build/

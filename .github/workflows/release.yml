@@ -34,6 +34,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # Rebuild the native hook libraries so the patch never ships stale prebuilt binaries.
+      - name: Build native libraries
+        run: bash native/build.sh
+
       # Semantic release runs its own Gradle build command.
       # Only dev and main branch will generate a release as specified by .releaserc
       - name: Release
