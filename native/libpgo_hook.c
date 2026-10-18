@@ -136,6 +136,7 @@ static void *worker(void *unused) {
 }
 
 __attribute__((constructor)) static void init(void) {
+    LOGI("libpgo_hook constructor running, starting worker");
     pthread_t t;
     if (pthread_create(&t, NULL, worker, NULL) == 0) pthread_detach(t);
     else LOGE("pthread_create failed");
