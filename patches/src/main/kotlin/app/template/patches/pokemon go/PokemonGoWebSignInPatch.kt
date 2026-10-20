@@ -10,7 +10,7 @@ import org.w3c.dom.Element
 private val COMPATIBILITY_POKEMON_GO_WEB_SIGN_IN = Compatibility(
     name = "Pokémon GO",
     packageName = "com.nianticlabs.pokemongo",
-    targets = listOf(AppTarget(version = "0.431.0")),
+    targets = listOf(AppTarget(version = "0.433.1"), AppTarget(version = "0.431.0")),
 )
 
 // Must match WebSignIn.SCHEME in extensions/extension (reversed OAuth client id).
@@ -90,7 +90,7 @@ private val pokemonGoWebSignInManifestPatch = resourcePatch {
 val pokemonGoWebSignIn = bytecodePatch(
     name = "Google web sign-in",
     description = "Replaces Google Play Services sign-in with a browser-based Google login " +
-        "so Google accounts work in re-signed builds. Pokémon GO 0.431.0.",
+        "so Google accounts work in re-signed builds. Pokémon GO 0.433.1 / 0.431.0.",
 ) {
     compatibleWith(COMPATIBILITY_POKEMON_GO_WEB_SIGN_IN)
     dependsOn(pokemonGoWebSignInManifestPatch)

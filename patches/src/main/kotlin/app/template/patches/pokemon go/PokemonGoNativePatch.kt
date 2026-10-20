@@ -9,17 +9,20 @@ private val COMPATIBILITY_POKEMON_GO = Compatibility(
     packageName = "com.nianticlabs.pokemongo",
     targets = listOf(
         AppTarget(
+            version = "0.433.1",
+        ),
+        AppTarget(
             version = "0.431.0",
         ),
     ),
 )
 
 /**
- * Experimental native loader infrastructure for Pokémon GO 0.431.0 arm64-v8a.
+ * Experimental native loader infrastructure for Pokémon GO (0.433.1, 0.431.0) arm64-v8a.
  */
 val pokemonGoNativeBootstrap = rawResourcePatch(
     name = "Enhanced throw",
-    description = "Installs the experimental native research loader for Pokémon GO 0.431.0 arm64-v8a.",
+    description = "Installs the experimental native research loader for Pokémon GO 0.433.1 / 0.431.0 arm64-v8a.",
 ) {
     compatibleWith(COMPATIBILITY_POKEMON_GO)
 

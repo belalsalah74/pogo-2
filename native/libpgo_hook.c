@@ -11,15 +11,16 @@
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__)
 
-/* Pokemon GO 0.431.0 arm64-v8a: Vector3 setter (RVA inside libil2cpp.so). */
-#define IL2CPP_RVA_CURVE_SET 0xAC16314UL
 #define PAGE_SZ 4096UL
 
 /*
- * Sanity check only (identical setters may share bytes elsewhere):
+ * The target is a tiny IL2CPP Vector3 setter, located by its machine code instead of a
+ * hardcoded address, so it keeps working across game updates as long as the code is
+ * identical and unique (verified: exactly one match in 0.431.0 and in 0.433.1):
  *   ldr x8,[x0,#0xe0]; cbz x8,+0x10; stp s0,s1,[x8,#16]; str s2,[x8,#24]; ret
+ * If a future build has zero or several matches, the hook is NOT installed.
  */
-static const uint8_t EXPECTED_PROLOGUE[20] = {
+static const uint8_t SIGNATURE[20] = {
     0x08, 0x70, 0x40, 0xf9, 0x88, 0x00, 0x00, 0xb4, 0x00, 0x05,
     0x02, 0x2d, 0x02, 0x19, 0x00, 0xbd, 0xc0, 0x03, 0x5f, 0xd6,
 };
@@ -72,8 +73,7 @@ static int in_relro(const struct scan_ctx *ctx, uintptr_t addr) {
     return 0;
 }
 
-static int install(const struct scan_ctx *ctx) {
-    uintptr_t target = ctx->bias + IL2CPP_RVA_CURVE_SET;
+static int install(const struct scan_ctx *ctx, uintptr_t target) {
     int found = 0;
 
     /* Method-pointer slots must be writable at load time, so only PF_W
@@ -102,6 +102,31 @@ static int install(const struct scan_ctx *ctx) {
     return found;
 }
 
+/* Counts 4-byte-aligned SIGNATURE matches in executable segments; returns the last match. */
+static uintptr_t find_unique_signature(const struct scan_ctx *ctx, int *count_out) {
+    uintptr_t found = 0;
+    int count = 0;
+    for (int i = 0; i < ctx->phnum; i++) {
+        const ElfW(Phdr) *p = &ctx->phdr[i];
+        if (p->p_type != PT_LOAD || !(p->p_flags & PF_X)) continue;
+        const uint8_t *cur = (const uint8_t *)(ctx->bias + p->p_vaddr);
+        size_t left = p->p_filesz;
+        while (left >= sizeof(SIGNATURE)) {
+            const uint8_t *m = (const uint8_t *)memmem(cur, left, SIGNATURE, sizeof(SIGNATURE));
+            if (!m) break;
+            if (((uintptr_t)m & 3UL) == 0) {
+                found = (uintptr_t)m;
+                count++;
+            }
+            size_t advance = (size_t)(m - cur) + 1;
+            cur += advance;
+            left -= advance;
+        }
+    }
+    *count_out = count;
+    return count == 1 ? found : 0;
+}
+
 static void *worker(void *unused) {
     (void)unused;
     struct scan_ctx ctx;
@@ -119,14 +144,16 @@ static void *worker(void *unused) {
         return NULL;
     }
 
-    uintptr_t target = ctx.bias + IL2CPP_RVA_CURVE_SET;
-    if (memcmp((const void *)target, EXPECTED_PROLOGUE, sizeof(EXPECTED_PROLOGUE)) != 0) {
-        LOGE("prologue mismatch at %lx - wrong game version? hook NOT installed",
-             (unsigned long)target);
+    int signature_count = 0;
+    uintptr_t target = find_unique_signature(&ctx, &signature_count);
+    if (!target) {
+        LOGE("throw setter signature matches=%d (expected exactly 1) - game version not "
+             "supported, hook NOT installed", signature_count);
         return NULL;
     }
+    LOGI("throw setter found at rva=%lx", (unsigned long)(target - ctx.bias));
 
-    int matches = install(&ctx);
+    int matches = install(&ctx, target);
     if (matches > 0)
         LOGI("curve setter hook installed matches=%d target=%lx", matches,
              (unsigned long)target);

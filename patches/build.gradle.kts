@@ -3,10 +3,10 @@ group = "app.pokemongo"
 patches {
     // TODO: Update this section with your project details.
     about {
-        name = "UserXYZ Patches"
+        name = "Belal Patches"
         description = "Patches for apps I like"
-        source = "git@github.com:UserXYZ/morphe-patches.git"
-        author = "Awesome dev"
+        source = "git@github.com:Belal/morphe-patches.git"
+        author = "ABelal Salah"
         contact = "na"
         website = "na"
         license = "GPLv3"
