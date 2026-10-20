@@ -15,19 +15,21 @@ Click here to add these patches to Morphe: https://morphe.software/add-source?gi
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.0.0-dev.1](https://github.com/belalsalah74/pogo1/releases/tag/v1.0.0-dev.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;1 patches total
+> **[v1.0.0](https://github.com/belalsalah74/pogo-2/releases/tag/v1.0.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;3 patches total
 <details open>
-<summary>📦 Pokémon GO&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<summary>📦 Pokémon GO&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 0.431.0 |
-| :---: |
+| 0.433.1 | 0.431.0 |
+| :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Enhanced throw](#enhanced-throw) | Installs the experimental native research loader for Pokémon GO 0.431.0 arm64-v8a. |  |
+| [Enhanced throw](#enhanced-throw) | Installs the experimental native research loader for Pokémon GO 0.433.1 / 0.431.0 arm64-v8a. |  |
+| [Google web sign-in](#google-web-sign-in) | Replaces Google Play Services sign-in with a browser-based Google login so Google accounts work in re-signed builds. Pokémon GO 0.433.1 / 0.431.0. |  |
+| [Spoof signature (ROM support)](#spoof-signature-rom-support) | Adds FAKE_PACKAGE_SIGNATURE and fake-signature metadata with Niantic's original certificate for ROMs/microG setups that support signature spoofing. Pokémon GO 0.431.0. |  |
 
 </details>
 
