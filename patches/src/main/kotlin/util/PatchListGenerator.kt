@@ -13,7 +13,7 @@ import java.io.File
 import java.net.URLClassLoader
 import java.util.jar.Manifest
 
-fun main() {
+fun main(args: Array<String>) {
     val patchFiles = setOf(
         File("build/libs/").listFiles { file ->
             val fileName = file.name
@@ -22,18 +22,24 @@ fun main() {
                     fileName.endsWith(".mpp")
         }!!.first()
     )
-    val loadedPatches = loadPatchesFromJar(patchFiles)
-    val patchClassLoader = URLClassLoader(patchFiles.map { it.toURI().toURL() }.toTypedArray())
-    val manifest = patchClassLoader.getResources("META-INF/MANIFEST.MF")
 
-    while (manifest.hasMoreElements()) {
-        Manifest(manifest.nextElement().openStream())
-            .mainAttributes
-            .getValue("Version")
-            ?.let {
-                generatePatchList(it, loadedPatches)
+    val releaseVersion = args.firstOrNull()
+        ?: System.getProperty("morphe.patch.version")
+        ?: run {
+            val patchClassLoader = URLClassLoader(patchFiles.map { it.toURI().toURL() }.toTypedArray())
+            val manifest = patchClassLoader.getResources("META-INF/MANIFEST.MF")
+
+            while (manifest.hasMoreElements()) {
+                val version = Manifest(manifest.nextElement().openStream())
+                    .mainAttributes
+                    .getValue("Version")
+                if (version != null) return@run version
             }
-    }
+
+            error("Unable to determine a release version for patch metadata")
+        }
+
+    generatePatchList(releaseVersion, loadPatchesFromJar(patchFiles))
 }
 
 @Suppress("DEPRECATION")
