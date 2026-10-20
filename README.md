@@ -10,7 +10,7 @@ Patches for apps I like.
 
 ### How to use these patches
 
-Click here to add these patches to Morphe: https://morphe.software/add-source?github=belalsalah74/pogo1
+Click here to add these patches to Morphe: https://morphe.software/add-source?github=belalsalah74/pogo-2
 
 ## 🩹 Patches list
 
